@@ -20,6 +20,9 @@ public abstract class Database {
       return null; // someday on a sunny day
    }
    public static<T extends Class> T getObjectFromRefrence(DatabaseReference dbRef) {
+
+      T val=null;
+
       dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -31,5 +34,6 @@ public abstract class Database {
 
          }
       });
+      return val;
    }
 }
