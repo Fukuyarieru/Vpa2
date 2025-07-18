@@ -11,29 +11,43 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vpa2.datastructures.User;
 
+import java.util.Optional;
+
 public abstract class Database {
    static String databaseUrl;
    static FirebaseDatabase database;
 
-   public static<T extends DatabaseDatastructure> T get(String header, String key) {
-      database.getReference(header).child(key);
-      return null; // someday on a sunny day
+   public static<T extends DatabaseDatastructure> T get(String key, Class<T> Class, final DatabaseCallback<T> callback) {
+      T temp;
+       try {
+           temp= Class.getConstructor().newInstance();
+       } catch (Exception e) {
+           callback.onFailure(DatabaseError.fromException(e));
+           throw new RuntimeException(e);
+       }
+       DatabaseReference dbRef=database.getReference(temp.header()).child(key);
+
+       dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               T value=snapshot.getValue(Class);
+               callback.onSuccess(Optional.of(value));
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+               callback.onSuccess(Optional.empty());
+           }
+       });
+
+       return null; // someday in a sunny day
    }
-   public static<T extends Class> T getObjectFromRefrence(DatabaseReference dbRef) {
+   public static void set(DatabaseDatastructure dataStructure) {
+      database.getReference(dataStructure.header()).child(dataStructure.key()).setValue(dataStructure);
+   }
 
-      T val=null;
-
-      dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-         @Override
-         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            snapshot.getValue(T.class);
-         }
-
-         @Override
-         public void onCancelled(@NonNull DatabaseError error) {
-
-         }
-      });
-      return val;
+   public interface DatabaseCallback<T> {
+       void onSuccess(Optional<T> result);
+       void onFailure(DatabaseError error);
    }
 }

@@ -14,7 +14,7 @@ public class User implements DatabaseDatastructure {
 
    @Override
    public String header() {
-      return "Users";
+      return "users";
    }
 
    @Override
