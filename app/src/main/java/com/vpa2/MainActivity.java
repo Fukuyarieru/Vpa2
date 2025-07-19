@@ -14,7 +14,11 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseError;
 import com.vpa2.databinding.ActivityMainBinding;
+import com.vpa2.datastructures.User;
+
+import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
       NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
       NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
       NavigationUI.setupWithNavController(navigationView, navController);
+
+
+
+      User user=new User("Ariel","123");
+      Database.set(user);
+      Database.get(/*key*/"Ariel", /*constructor class*/User.class,/*Consumer<Optional<T>>*/ user1 -> );
    }
 
    @Override

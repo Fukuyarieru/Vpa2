@@ -12,31 +12,38 @@ import com.google.firebase.database.ValueEventListener;
 import com.vpa2.datastructures.User;
 
 import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+
+import javax.security.auth.callback.Callback;
 
 public abstract class Database {
    static String databaseUrl;
    static FirebaseDatabase database;
 
-   public static<T extends DatabaseDatastructure> T get(String key, Class<T> Class, final DatabaseCallback<T> callback) {
+   public static<T extends DatabaseDatastructure> T get(String key, Class<T> Class, final Consumer<Optional<T>> callback) throws RuntimeException {
       T temp;
        try {
            temp= Class.getConstructor().newInstance();
        } catch (Exception e) {
-           callback.onFailure(DatabaseError.fromException(e));
            throw new RuntimeException(e);
        }
        DatabaseReference dbRef=database.getReference(temp.header()).child(key);
 
        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+           // ADD FUTURE HERE OR SOMETHING
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
                T value=snapshot.getValue(Class);
-               callback.onSuccess(Optional.of(value));
+               if(value!=null)
+                   callback.accept(Optional.of(value));
+               else
+                   callback.accept(Optional.empty());
            }
 
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
-               callback.onSuccess(Optional.empty());
+               callback.accept(Optional.empty());
            }
        });
 
@@ -44,10 +51,5 @@ public abstract class Database {
    }
    public static void set(DatabaseDatastructure dataStructure) {
       database.getReference(dataStructure.header()).child(dataStructure.key()).setValue(dataStructure);
-   }
-
-   public interface DatabaseCallback<T> {
-       void onSuccess(Optional<T> result);
-       void onFailure(DatabaseError error);
    }
 }
