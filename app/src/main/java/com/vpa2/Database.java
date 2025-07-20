@@ -13,6 +13,7 @@ import com.vpa2.datastructures.User;
 
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import javax.security.auth.callback.Callback;
@@ -21,33 +22,36 @@ public abstract class Database {
    static String databaseUrl;
    static FirebaseDatabase database;
 
-   public static<T extends DatabaseDatastructure> T get(String key, Class<T> Class, final Consumer<Optional<T>> callback) throws RuntimeException {
-      T temp;
+   public static<T extends DatabaseDatastructure> CompletableFuture<Optional<T>> get(String key, Class<T> typeClass)  {
+       T temp;
        try {
-           temp= Class.getConstructor().newInstance();
+           temp= typeClass.getConstructor().newInstance();
        } catch (Exception e) {
-           throw new RuntimeException(e);
+           return new CompletableFuture<>();
        }
+
+       final CompletableFuture<Optional<T>> future = new CompletableFuture<>();
+
        DatabaseReference dbRef=database.getReference(temp.header()).child(key);
 
        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
            // ADD FUTURE HERE OR SOMETHING
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               T value=snapshot.getValue(Class);
+               T value=snapshot.getValue(typeClass);
                if(value!=null)
-                   callback.accept(Optional.of(value));
+                   future.complete(Optional.of(value));
                else
-                   callback.accept(Optional.empty());
+                   future.complete(Optional.empty());
            }
 
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
-               callback.accept(Optional.empty());
+               future.complete(Optional.empty());
            }
        });
 
-       return null; // someday in a sunny day
+       return future; // someday in a sunny day
    }
    public static void set(DatabaseDatastructure dataStructure) {
       database.getReference(dataStructure.header()).child(dataStructure.key()).setValue(dataStructure);

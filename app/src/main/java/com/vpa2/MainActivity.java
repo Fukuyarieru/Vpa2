@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
       User user=new User("Ariel","123");
       Database.set(user);
-      Database.get(/*key*/"Ariel", /*constructor class*/User.class,/*Consumer<Optional<T>>*/ user1 -> );
+      User getUser=Database.get("Ariel", User.class).get().get();
    }
 
    @Override
