@@ -2,9 +2,6 @@ package com.vpa2.datastructures;
 
 import com.vpa2.DatabaseDatastructure;
 
-import javax.annotation.processing.Generated;
-
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,29 +11,34 @@ public class Video implements DatabaseDatastructure {
 
     private String title;
     private String owner;
+    private String description;
     private byte[] thumbnail;
     private String[] peopleLike;
     private String[] peopleDislike;
     private String[] peopleViewed;
     private String[] playlistsIncluded;
 
-
     public static final int likeValue=3;
     public static final int dislikeValue=3;
     public static final int viewValue=1;
 
+    public static final String defaultVideoName="Video";
+    public static final String defaultVideoOwner=User.defaultUserName;
+    public static final String defaultVideoDescription="";
+
     public Video() {
-        // TODO
+        this(defaultVideoName,defaultVideoOwner);
     }
+
     public Video(String title, String owner) {
         this.title=title;
         this.owner=owner;
-
-        thumbnail= new byte[]{0};
-        peopleLike=new String[]{};
-        peopleDislike=new String[]{};
-        peopleViewed=new String[]{};
-        playlistsIncluded=new String[]{};
+        this.description=defaultVideoDescription;
+        this.thumbnail= new byte[]{0};
+        this.peopleLike=new String[]{};
+        this.peopleDislike=new String[]{};
+        this.peopleViewed=new String[]{};
+        this.playlistsIncluded=new String[]{};
     }
 
     public int views() {
