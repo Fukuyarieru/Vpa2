@@ -14,7 +14,11 @@ public class User implements DatabaseDatastructure {
    private String description;
    private byte[] picture;
 
-   public static final String defaultUserName="User";
+   private String[] peopleLike;
+   private String[] peopleDislike;
+   private String[] peopleViewed;
+
+   public static final String defaultUserName="user";
    public static final String defaultUserPassword="123";
    public static final String defaultUserDescription="";
 
@@ -27,6 +31,10 @@ public class User implements DatabaseDatastructure {
       this.password = password;
       this.description=defaultUserDescription;
       this.picture=new byte[]{0};
+
+      this.peopleLike=new String[]{};
+      this.peopleDislike=new String[]{};
+      this.peopleViewed=new String[]{};
    }
 
    @Override

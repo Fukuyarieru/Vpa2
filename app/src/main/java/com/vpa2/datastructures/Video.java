@@ -13,16 +13,17 @@ public class Video implements DatabaseDatastructure {
     private String owner;
     private String description;
     private byte[] thumbnail;
+    private String[] playlistsIncluded;
+
     private String[] peopleLike;
     private String[] peopleDislike;
     private String[] peopleViewed;
-    private String[] playlistsIncluded;
 
     public static final int likeValue=3;
     public static final int dislikeValue=3;
     public static final int viewValue=1;
 
-    public static final String defaultVideoName="Video";
+    public static final String defaultVideoName="video";
     public static final String defaultVideoOwner=User.defaultUserName;
     public static final String defaultVideoDescription="";
 
@@ -35,10 +36,11 @@ public class Video implements DatabaseDatastructure {
         this.owner=owner;
         this.description=defaultVideoDescription;
         this.thumbnail= new byte[]{0};
+        this.playlistsIncluded=new String[]{};
+
         this.peopleLike=new String[]{};
         this.peopleDislike=new String[]{};
         this.peopleViewed=new String[]{};
-        this.playlistsIncluded=new String[]{};
     }
 
     public int views() {
