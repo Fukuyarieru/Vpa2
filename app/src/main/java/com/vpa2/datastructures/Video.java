@@ -20,9 +20,9 @@ public class Video implements DatabaseDatastructure {
     private String[] peopleDislike;
     private String[] peopleViewed;
 
-    public static final int likeValue=3;
-    public static final int dislikeValue=3;
-    public static final int viewValue=1;
+    public static final int LIKE_VALUE =3;
+    public static final int DISLIKE_VALUE =3;
+    public static final int VIEW_VALUE =1;
 
     public static final String DEFAULT_VIDEO_NAME ="video";
     public static final String DEFAULT_VIDEO_OWNER =User.DEFAULT_USER_NAME;
@@ -46,9 +46,9 @@ public class Video implements DatabaseDatastructure {
     }
 
     public int score() {
-        int likesValue= peopleLike.length*likeValue;
-        int dislikesValue= peopleDislike.length*dislikeValue;
-        int viewsValue=views*viewValue;
+        int likesValue= peopleLike.length* LIKE_VALUE;
+        int dislikesValue= peopleDislike.length* DISLIKE_VALUE;
+        int viewsValue=views* VIEW_VALUE;
 
         int score=likesValue-dislikesValue+viewsValue;
         return score;
