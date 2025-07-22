@@ -18,18 +18,18 @@ public class Playlist implements DatabaseDatastructure {
     private String[] peopleDislike;
     private String[] peopleViewed;
 
-    public static final String defaultPlaylistTitle="playlist";
-    public static final String defaultPlaylistOwner=User.defaultUserName;
-    public static final String defaultPlaylistDescription="";
+    public static final String DEFAULT_PLAYLIST_TITLE ="playlist";
+    public static final String DEFAULT_PLAYLIST_OWNER =User.DEFAULT_USER_NAME;
+    public static final String DEFAULT_PLAYLIST_DESCRIPTION ="";
 
     public Playlist() {
-        this(defaultPlaylistTitle,new Video[]{});
+        this(DEFAULT_PLAYLIST_TITLE,new Video[]{});
     }
     public Playlist(String title, Video[]videos) {
         this.title=title;
         this.videos=videos;
-        this.description=defaultPlaylistDescription;
-        this.owner=defaultPlaylistOwner;
+        this.description= DEFAULT_PLAYLIST_DESCRIPTION;
+        this.owner= DEFAULT_PLAYLIST_OWNER;
         this.views=0;
 
         this.peopleLike=new String[]{};

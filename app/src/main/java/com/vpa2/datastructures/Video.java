@@ -24,18 +24,18 @@ public class Video implements DatabaseDatastructure {
     public static final int dislikeValue=3;
     public static final int viewValue=1;
 
-    public static final String defaultVideoName="video";
-    public static final String defaultVideoOwner=User.defaultUserName;
-    public static final String defaultVideoDescription="";
+    public static final String DEFAULT_VIDEO_NAME ="video";
+    public static final String DEFAULT_VIDEO_OWNER =User.DEFAULT_USER_NAME;
+    public static final String DEFAULT_VIDEO_DESCRIPTION ="";
 
     public Video() {
-        this(defaultVideoName,defaultVideoOwner);
+        this(DEFAULT_VIDEO_NAME, DEFAULT_VIDEO_OWNER);
     }
 
     public Video(String title, String owner) {
         this.title=title;
         this.owner=owner;
-        this.description=defaultVideoDescription;
+        this.description= DEFAULT_VIDEO_DESCRIPTION;
         this.thumbnail= new byte[]{0};
         this.playlistsIncluded=new String[]{};
         this.views=0;

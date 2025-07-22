@@ -22,18 +22,18 @@ public class User implements DatabaseDatastructure {
    private String[] peopleDislike;
    private String[] peopleViewed;
 
-   public static final String defaultUserName="user";
-   public static final String defaultUserPassword="123";
-   public static final String defaultUserDescription="";
+   public static final String DEFAULT_USER_NAME ="user";
+   public static final String DEFAULT_USER_PASSWORD ="123";
+   public static final String DEFAULT_USER_DESCRIPTION ="";
 
    public User() {
-      this(defaultUserName,defaultUserPassword);
+      this(DEFAULT_USER_NAME, DEFAULT_USER_PASSWORD);
    }
 
    public User(String name, String password) {
       this.name = name;
       this.password = password;
-      this.description=defaultUserDescription;
+      this.description= DEFAULT_USER_DESCRIPTION;
       this.picture=new byte[]{0};
 
       this.viewHistory=new Playlist(name+"'s view history", new Video[]{});

@@ -17,11 +17,11 @@ public class Comment implements DatabaseDatastructure {
     private String[] peopleDislike;
     private String[] peopleViewed;
 
-    public static final String defaultCommentText="comment";
-    public static final String defaultCommentCommenter=User.defaultUserName;
+    public static final String DEFAULT_COMMENT_TEXT ="comment";
+    public static final String DEFAULT_COMMENT_COMMENTER =User.DEFAULT_USER_NAME;
 
     public Comment() {
-        this(defaultCommentText,defaultCommentCommenter);
+        this(DEFAULT_COMMENT_TEXT, DEFAULT_COMMENT_COMMENTER);
     }
     public Comment(String text, String commenter) {
         this(text,commenter,"?");
