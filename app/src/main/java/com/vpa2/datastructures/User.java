@@ -14,6 +14,10 @@ public class User implements DatabaseDatastructure {
    private String description;
    private byte[] picture;
 
+   private Playlist viewHistory;
+   private String[] ownedPlaylists;
+   private Playlist ownedVideos;
+
    private String[] peopleLike;
    private String[] peopleDislike;
    private String[] peopleViewed;
@@ -31,6 +35,10 @@ public class User implements DatabaseDatastructure {
       this.password = password;
       this.description=defaultUserDescription;
       this.picture=new byte[]{0};
+
+      this.viewHistory=new Playlist(name+"'s view history", new Video[]{});
+      this.ownedVideos=new Playlist(name+"'s owned videos",new Video[]{});
+      this.ownedPlaylists=new String[]{viewHistory.getTitle(),ownedVideos.getTitle()};
 
       this.peopleLike=new String[]{};
       this.peopleDislike=new String[]{};

@@ -12,6 +12,7 @@ public class Playlist implements DatabaseDatastructure {
     private String description;
     private String owner;
     private Video[] videos;
+    private int views;
 
     private String[] peopleLike;
     private String[] peopleDislike;
@@ -29,6 +30,7 @@ public class Playlist implements DatabaseDatastructure {
         this.videos=videos;
         this.description=defaultPlaylistDescription;
         this.owner=defaultPlaylistOwner;
+        this.views=0;
 
         this.peopleLike=new String[]{};
         this.peopleDislike=new String[]{};

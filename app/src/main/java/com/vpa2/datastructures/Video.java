@@ -14,6 +14,7 @@ public class Video implements DatabaseDatastructure {
     private String description;
     private byte[] thumbnail;
     private String[] playlistsIncluded;
+    private int views;
 
     private String[] peopleLike;
     private String[] peopleDislike;
@@ -37,19 +38,17 @@ public class Video implements DatabaseDatastructure {
         this.description=defaultVideoDescription;
         this.thumbnail= new byte[]{0};
         this.playlistsIncluded=new String[]{};
+        this.views=0;
 
         this.peopleLike=new String[]{};
         this.peopleDislike=new String[]{};
         this.peopleViewed=new String[]{};
     }
 
-    public int views() {
-        return this.peopleViewed.length;
-    }
     public int score() {
         int likesValue= peopleLike.length*likeValue;
         int dislikesValue= peopleDislike.length*dislikeValue;
-        int viewsValue=peopleViewed.length*viewValue;
+        int viewsValue=views*viewValue;
 
         int score=likesValue-dislikesValue+viewsValue;
         return score;

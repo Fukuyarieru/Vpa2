@@ -10,6 +10,8 @@ import lombok.Setter;
 public class Comment implements DatabaseDatastructure {
     private String text;
     private String commenter;
+    private String date;
+    private int views;
 
     private String[] peopleLike;
     private String[] peopleDislike;
@@ -22,8 +24,13 @@ public class Comment implements DatabaseDatastructure {
         this(defaultCommentText,defaultCommentCommenter);
     }
     public Comment(String text, String commenter) {
+        this(text,commenter,"?");
+    }
+    public Comment(String text, String commenter, String date) {
         this.text=text;
         this.commenter=commenter;
+        this.date=date;
+        this.views=0;
 
         this.peopleLike=new String[]{};
         this.peopleDislike=new String[]{};
