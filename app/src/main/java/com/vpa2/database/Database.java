@@ -1,33 +1,28 @@
-package com.vpa2;
+package com.vpa2.database;
 
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vpa2.datastructures.User;
+import com.vpa2.DatabaseDatastructure;
 
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-
-import javax.security.auth.callback.Callback;
 
 public abstract class Database {
    static String databaseUrl;
    static FirebaseDatabase database;
 
-   public static<T extends DatabaseDatastructure> CompletableFuture<Optional<T>> get(String key, Class<T> typeClass)  {
+   public static<T extends DatabaseDatastructure> Optional<T> get(String key, Class<T> typeClass)  {
        T temp;
        try {
            temp= typeClass.getConstructor().newInstance();
        } catch (Exception e) {
-           return new CompletableFuture<>();
+           return Optional.empty();
        }
 
        final CompletableFuture<Optional<T>> future = new CompletableFuture<>();
@@ -51,7 +46,11 @@ public abstract class Database {
            }
        });
 
-       return future; // someday in a sunny day
+       try {
+           return future.get();
+       } catch (Exception ignored) {
+           return Optional.empty();
+       }
    }
    public static void set(DatabaseDatastructure dataStructure) {
       database.getReference(dataStructure.header()).child(dataStructure.key()).setValue(dataStructure);

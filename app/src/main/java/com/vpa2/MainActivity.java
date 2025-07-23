@@ -14,11 +14,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseError;
+import com.vpa2.database.Database;
 import com.vpa2.databinding.ActivityMainBinding;
 import com.vpa2.datastructures.User;
-
-import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
 
