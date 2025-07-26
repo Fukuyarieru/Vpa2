@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vpa2.DatabaseDatastructure;
+import com.vpa2.DatabaseAccess;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +17,7 @@ public abstract class Database {
    static String databaseUrl;
    static FirebaseDatabase database;
 
-   public static<T extends DatabaseDatastructure> Optional<T> get(String key, Class<T> typeClass)  {
+   public static<T extends DatabaseAccess> Optional<T> get(String key, Class<T> typeClass)  {
        T temp;
        try {
            temp= typeClass.getConstructor().newInstance();
@@ -52,7 +52,8 @@ public abstract class Database {
            return Optional.empty();
        }
    }
-   public static void set(DatabaseDatastructure dataStructure) {
+
+   public static void set(DatabaseAccess dataStructure) {
       database.getReference(dataStructure.header()).child(dataStructure.key()).setValue(dataStructure);
    }
 }

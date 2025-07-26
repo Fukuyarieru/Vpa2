@@ -1,45 +1,31 @@
 package com.vpa2.datastructures;
 
-import com.vpa2.DatabaseDatastructure;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Playlist implements DatabaseDatastructure {
+public class Playlist extends DataStructure {
     private String title;
     private String description;
     private String owner;
-    private Video[] videos;
-    private int views;
-
-    private String[] peopleLike;
-    private String[] peopleDislike;
-    private String[] peopleViewed;
+    private Collection<String> videos;
 
     public static final String DEFAULT_PLAYLIST_TITLE ="playlist";
     public static final String DEFAULT_PLAYLIST_OWNER =User.DEFAULT_USER_NAME;
     public static final String DEFAULT_PLAYLIST_DESCRIPTION ="";
 
     public Playlist() {
-        this(DEFAULT_PLAYLIST_TITLE,new Video[]{});
+        this(DEFAULT_PLAYLIST_TITLE,new ArrayList<>());
     }
-    public Playlist(String title, Video[]videos) {
+    public Playlist(String title, Collection<String>videos) {
         this.title=title;
         this.videos=videos;
         this.description= DEFAULT_PLAYLIST_DESCRIPTION;
         this.owner= DEFAULT_PLAYLIST_OWNER;
-        this.views=0;
-
-        this.peopleLike=new String[]{};
-        this.peopleDislike=new String[]{};
-        this.peopleViewed=new String[]{};
-    }
-
-    @Override
-    public String header() {
-        return "playlists";
     }
 
     @Override

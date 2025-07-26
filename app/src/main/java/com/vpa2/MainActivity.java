@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
       User user=new User("Ariel","123");
       Database.set(user);
-      User getUser=Database.get("Ariel", User.class).get().get();
+      User getUser=Database.get("Ariel", User.class).get();
    }
 
    @Override
