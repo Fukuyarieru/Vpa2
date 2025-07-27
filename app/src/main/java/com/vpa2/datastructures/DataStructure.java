@@ -21,6 +21,7 @@ public abstract class DataStructure implements DatabaseAccess {
     private final Collection<String> peopleLike = new ArrayList<>();
     private final Collection<String> peopleDislike = new ArrayList<>();
     private final Collection<String> peopleViewed = new ArrayList<>();
+    private final Collection<String> replyContexts = new ArrayList<>();
     private int views = 0;
 
     public int score() {
@@ -33,24 +34,53 @@ public abstract class DataStructure implements DatabaseAccess {
         return score;
     }
 
-    public void view(String username) {
+    public void addView(String username) {
         ++views;
         if (!peopleViewed.contains(username)) {
             peopleViewed.add(username);
         }
     }
 
-    public void like(String username) {
+    public void addLike(String username) {
         peopleDislike.remove(username);
         if (!peopleLike.contains(username)) {
             peopleLike.add(username);
         }
     }
 
-    public void dislike(String username) {
+    public void addDislike(String username) {
         peopleLike.remove(username);
         if (!peopleDislike.contains(username)) {
             peopleDislike.add(username);
         }
     }
+
+// problem with these are 2: i need to update in database outside this method, and i need a comment pointer beforehand, so next method is solution
+//    public void addComment(String text, String commenter) {
+//        Comment comment=new Comment(text,commenter,this);
+//        replyContexts.add(comment.getContext());
+//    }
+
+    // comment must exist before entering this method because of need uploading to database
+    // database actions should not happen inside regular logic methods
+    public void addComment(Comment comment) {
+        // very bad temporary whooping of an idea of a solution (made like this to always force correct contexts in case of change), TODO
+        comment.setContext(new Comment(comment.getText(),comment.getCommenter(),this).getContext());
+        replyContexts.add(comment.getContext());
+    }
+
+
+    // FROM: COMMENT CLASS
+    //  NO IDEA HOW TO MAKE IT BE CORRECTLY SYNBABLE WITH SYNC.
+//  PROBLEM OCCURS FROM THE FACT COMMENTS NEED TO BE UPLOADED TO DATABASE AND THIS IS JUST A METHOD.
+//  KEEPING CODE AS A REMINDER
+//    public void addReply(String text, String commenter) {
+//
+//    }
+//    public void addReply(Comment comment) {
+//
+//    }
+//    public void addReplies(Comment... comments) {
+//
+//    }
 }

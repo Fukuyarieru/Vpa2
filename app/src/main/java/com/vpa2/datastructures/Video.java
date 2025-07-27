@@ -12,26 +12,25 @@ import lombok.Setter;
 @Setter
 public class Video extends DataStructure implements DatabaseAccess {
 
+    public static final String DEFAULT_VIDEO_NAME = "video";
+    public static final String DEFAULT_VIDEO_OWNER = User.DEFAULT_USER_NAME;
+    public static final String DEFAULT_VIDEO_DESCRIPTION = "video_description";
     private String title;
     private String owner;
     private String description;
     private byte[] thumbnail;
     private Collection<String> playlistsIncluded;
 
-    public static final String DEFAULT_VIDEO_NAME ="video";
-    public static final String DEFAULT_VIDEO_OWNER =User.DEFAULT_USER_NAME;
-    public static final String DEFAULT_VIDEO_DESCRIPTION ="";
-
     public Video() {
         this(DEFAULT_VIDEO_NAME, DEFAULT_VIDEO_OWNER);
     }
 
     public Video(String title, String owner) {
-        this.title=title;
-        this.owner=owner;
-        this.description= DEFAULT_VIDEO_DESCRIPTION;
-        this.thumbnail= new byte[]{0};
-        this.playlistsIncluded=new ArrayList<>();
+        this.title = title;
+        this.owner = owner;
+        this.description = DEFAULT_VIDEO_DESCRIPTION;
+        this.thumbnail = new byte[]{0};
+        this.playlistsIncluded = new ArrayList<>();
     }
 
     @Override

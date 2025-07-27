@@ -9,39 +9,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Comment extends DataStructure  {
+public class Comment extends DataStructure {
+
+    public static final String DEFAULT_COMMENT_TEXT = "comment";
+    public static final String DEFAULT_COMMENT_COMMENTER = User.DEFAULT_USER_NAME;
     private String text;
     private String commenter;
     private String date;
     // "EXPERIMENTAL" IDEA
 //    private String parent;
     private String context;
-    private Collection<String> children;
-
-    public static final String DEFAULT_COMMENT_TEXT ="comment";
-    public static final String DEFAULT_COMMENT_COMMENTER =User.DEFAULT_USER_NAME;
+//    private Collection<String> children; - renamed to comments - moved to DataStructure
 
     public Comment() {
-        this(DEFAULT_COMMENT_TEXT, DEFAULT_COMMENT_COMMENTER,new Video());
-    }
-    public Comment(String text, String commenter, DatabaseAccess parent) {
-        this.text=text;
-        this.commenter=commenter;
-        this.context=parent.key()+"|"+text;
+        this(DEFAULT_COMMENT_TEXT, DEFAULT_COMMENT_COMMENTER, new Video());
     }
 
-//  NO IDEA HOW TO MAKE IT BE CORRECTLY SYNBABLE WITH SYNC.
-//  PROBLEM OCCURS FROM THE FACT COMMENTS NEED TO BE UPLOADED TO DATABASE AND THIS IS JUST A METHOD.
-//  KEEPING CODE AS A REMINDER
-//    public void addReply(String text, String commenter) {
-//
-//    }
-//    public void addReply(Comment comment) {
-//
-//    }
-//    public void addReplies(Comment... comments) {
-//
-//    }
+    public Comment(String text, String commenter, DatabaseAccess parent) {
+        this.text = text;
+        this.commenter = commenter;
+        this.context = parent.key() + "|" + text;
+    }
 
     @Override
     public String key() {
