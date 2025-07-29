@@ -1,6 +1,6 @@
 package com.vpa2.datastructures;
 
-import com.vpa2.DatabaseAccess;
+import com.vpa2.database.DatabaseAccess;
 
 import java.util.ArrayList;
 import java.util.Collection;

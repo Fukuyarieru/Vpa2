@@ -1,7 +1,7 @@
 package com.vpa2.datastructures;
 
 
-import com.vpa2.DatabaseAccess;
+import com.vpa2.database.DatabaseAccess;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +23,7 @@ public abstract class DataStructure implements DatabaseAccess {
     private final Collection<String> peopleViewed = new ArrayList<>();
     private final Collection<String> replyContexts = new ArrayList<>();
     private String date = "?";
+    private long timestamp=0; // TODO, redo date with this
     private int views = 0;
 
 //    protected DataStructure() {
