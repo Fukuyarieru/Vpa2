@@ -15,11 +15,7 @@ public class Comment extends DataStructure {
     public static final String DEFAULT_COMMENT_COMMENTER = User.DEFAULT_USER_NAME;
     private String text;
     private String commenter;
-    private String date;
-    // "EXPERIMENTAL" IDEA
-//    private String parent;
     private String context;
-//    private Collection<String> children; - renamed to comments - moved to DataStructure
 
     public Comment() {
         this(DEFAULT_COMMENT_TEXT, DEFAULT_COMMENT_COMMENTER, new Video());
