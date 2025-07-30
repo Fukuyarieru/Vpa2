@@ -1,7 +1,7 @@
 package com.vpa2.datastructures;
 
 
-import com.vpa2.DatabaseAccess;
+import com.vpa2.database.DatabaseAccess;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +22,13 @@ public abstract class DataStructure implements DatabaseAccess {
     private final Collection<String> peopleDislike = new ArrayList<>();
     private final Collection<String> peopleViewed = new ArrayList<>();
     private final Collection<String> replyContexts = new ArrayList<>();
+    private String date = "?";
+    private long timestamp=0; // TODO, redo date with this
     private int views = 0;
+
+//    protected DataStructure() {
+//
+//    }
 
     public int score() {
         int likesValue = peopleLike.size() * LIKE_VALUE;
@@ -65,7 +71,7 @@ public abstract class DataStructure implements DatabaseAccess {
     // database actions should not happen inside regular logic methods
     public void addComment(Comment comment) {
         // very bad temporary whooping of an idea of a solution (made like this to always force correct contexts in case of change), TODO
-        comment.setContext(new Comment(comment.getText(),comment.getCommenter(),this).getContext());
+        comment.setContext(new Comment(comment.getText(), comment.getCommenter(), this).getContext());
         replyContexts.add(comment.getContext());
     }
 

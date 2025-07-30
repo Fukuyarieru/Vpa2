@@ -1,4 +1,4 @@
-package com.vpa2;
+package com.vpa2.database;
 
 public interface DatabaseAccess {
    public default String header() {
