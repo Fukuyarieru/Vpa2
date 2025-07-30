@@ -9,5 +9,5 @@ public interface DatabaseAccess {
    /// in the database to look up through.
    ///
    /// As an example `UUID`, `NAME`, `URL`, `CONTEXT` and etc.
-   public String key();
+   public abstract String key();
 }
