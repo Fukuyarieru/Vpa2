@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "180501364730",
+    "project_id": "videopiratingapp2",
+    "storage_bucket": "videopiratingapp2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180501364730:android:a610245962927dc0262e43",
+        "android_client_info": {
+          "package_name": "com.vpa2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsoAjgNWXNj1V0rntPhrbLea_Tb8qIbKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180501364730:android:9881b3e3eef482d9262e43",
+        "android_client_info": {
+          "package_name": "fukuya.vpa2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsoAjgNWXNj1V0rntPhrbLea_Tb8qIbKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
