@@ -2,6 +2,7 @@ package fukuya.vpa2.Database;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,9 +14,7 @@ import java.util.concurrent.CompletableFuture;
 public class Database {
     private static final FirebaseDatabase database=FirebaseDatabase.getInstance();
 
-//    public T get<T>() {}
-
-    public<T> CompletableFuture<T> get(DatabaseLink<T> link) {
+    public<T extends DatabaseObject> CompletableFuture<T> get(DatabaseLink<T> link) {
         CompletableFuture<T> future=new CompletableFuture<>();
         DatabaseReference ref=this.getRef(link);
 
@@ -43,5 +42,9 @@ public class Database {
             ref=ref.child(str);
         }
         return ref;
+    }
+
+    public Task<Void> set(DatabaseObject object) {
+        return this.getRef(object.getLink()).setValue(object);
     }
 }
