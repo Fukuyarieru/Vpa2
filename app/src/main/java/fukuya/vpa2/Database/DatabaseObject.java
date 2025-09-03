@@ -6,7 +6,7 @@ import java.util.Collection;
 public abstract class DatabaseObject {
     private DatabaseLink<Class<DatabaseObject>> link;
 
-    public DatabaseLink<Class<DatabaseObject>> getLink() {
+    public DatabaseLink<Class<DatabaseObject>> link() {
         return this.link;
     }
 

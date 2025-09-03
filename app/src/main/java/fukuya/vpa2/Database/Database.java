@@ -45,6 +45,6 @@ public class Database {
     }
 
     public Task<Void> set(DatabaseObject object) {
-        return this.getRef(object.getLink()).setValue(object);
+        return this.getRef(object.link()).setValue(object);
     }
 }

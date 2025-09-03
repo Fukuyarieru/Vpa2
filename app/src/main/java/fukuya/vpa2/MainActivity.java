@@ -4,9 +4,6 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import fukuya.vpa2.Database.Database;
 import fukuya.vpa2.Database.User;
@@ -31,6 +28,6 @@ public class MainActivity extends AppCompatActivity {
         Database db=new Database();
         db.set(user);
 
-        User userCopy=db.get(user.getLink()).get();
+        User userCopy=db.get(user.link()).get();
     }
 }
